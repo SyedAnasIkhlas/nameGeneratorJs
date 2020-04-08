@@ -8,7 +8,8 @@ function shuffelWord(word) {
 }
 
 function removeSpace(keyword) {
-  return keyword.replace(" ", "");
+  // return keyword.replace(" ", "");
+  return keyword;
 }
 
 function verifyOptions(keyword, space, shuffle) {

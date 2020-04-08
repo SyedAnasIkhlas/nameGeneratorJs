@@ -17,7 +17,7 @@ function verifyOptions(keyword, space, shuffle) {
   } else if (shuffle == true) {
     return (keyword = shuffelWord(keyword));
   } else {
-    return (keyword = keywoed);
+    return (keyword = keyword);
   }
 }
 

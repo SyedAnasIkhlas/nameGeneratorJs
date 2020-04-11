@@ -1,3 +1,22 @@
+function randomWord(keyword = false,length) {
+   let result = '';
+   let characters;
+   if(keyword == false)
+   {
+    characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   }
+   else
+   {
+     characters = keyword;
+   }
+   let charactersLength = characters.length;
+   for ( let i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+
+
 function shuffelWord(word) {
   var shuffledWord = "";
   word = word.split("");
@@ -9,49 +28,63 @@ function shuffelWord(word) {
 
 function removeSpace(keyword) {
   // return keyword.replace(" ", "");
-  return keyword;
+  return keyword.replace(/\s/g, "");
+  // return keyword;
 }
 
 function verifyOptions(keyword, space, shuffle) {
-  if (space == false) {
-    return (keyword = removeSpace(keyword));
-  } else if (shuffle == true) {
-    return (keyword = shuffelWord(keyword));
+  if (space == true) {
+    keyword = removeSpace(keyword);
   } else {
-    return (keyword = keyword);
+    keyword = keyword;
   }
+  if (shuffle == true) {
+    keyword = shuffelWord(keyword);
+  } else {
+    keyword = keyword;
+  }
+  return keyword;
 }
 
-function loremKeyword(keyword, space = true, shuffle = false) {
-  keyword = verifyOptions(keyword, space, shuffle);
-  return faker.lorem.word() + keyword;
+function loremKeyword(keyword, space, shuffle) {
+  keyword = verifyOptions(faker.lorem.word() + keyword, space, shuffle);
+  return keyword;
 }
 
-function addWordBeforeKeyword(keyword, space = true, shuffle = false) {
-  keyword = verifyOptions(keyword, space, shuffle);
-  return faker.name.firstName() + keyword;
+function addWordBeforeKeyword(keyword, space, shuffle) {
+  keyword = verifyOptions(faker.name.firstName() + keyword, space, shuffle);
+  return keyword;
 }
 
-function addWordAfterKeyword(keyword, space = true, shuffle = false) {
-  keyword = verifyOptions(keyword, space, shuffle);
-  return keyword + faker.name.lastName();
+function addWordAfterKeyword(keyword, space, shuffle) {
+  keyword = verifyOptions(keyword + faker.name.lastName(), space, shuffle);
+  return keyword;
 }
 
-function keywordAlphaNum(keyword, space = true, shuffle = false) {
-  keyword = verifyOptions(keyword, space, shuffle);
-  return keyword + faker.random.alphaNumeric();
+function keywordAlphaNum(keyword, space, shuffle) {
+  keyword = verifyOptions(
+    keyword + faker.random.alphaNumeric(),
+    space,
+    shuffle
+  );
+  return keyword;
 }
 
-function keywordNumber(keyword, space = true, shuffle = false) {
-  keyword = verifyOptions(keyword, space, shuffle);
-  return keyword + faker.random.number();
+function keywordNumber(keyword, space, shuffle) {
+  keyword = verifyOptions(keyword + faker.random.number(), space, shuffle);
+  return keyword;
 }
 
-function prefixKeyword(keyword, space = true, shuffle = false) {
-  keyword = verifyOptions(keyword, space, shuffle);
-  return faker.name.prefix() + "." + keyword + faker.random.word();
+function prefixKeyword(keyword, space, shuffle) {
+  keyword = verifyOptions(
+    // faker.name.prefix() + "." + keyword + faker.random.word(),
+    faker.name.prefix() + keyword,
+    space,
+    shuffle
+  );
+  return keyword;
 }
-function keywordSuffix(keyword, space = true, shuffle = false) {
-  keyword = verifyOptions(keyword, space, shuffle);
-  return keyword + faker.name.suffix();
+function keywordSuffix(keyword, space, shuffle) {
+  keyword = verifyOptions(keyword + faker.name.suffix(), space, shuffle);
+  return keyword;
 }
